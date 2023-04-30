@@ -35,7 +35,7 @@ function paintShopItem(n, srcImg) {
   name.textContent = cards[n].name;
   price.textContent = cards[n].price;
 
-  // задаем им классы
+  // задаем им классы и стили
   shopitem.classList.add("shop__item");
   img.classList.add("shop__img");
   img.style.backgroundImage = `url(${srcImg})`;
@@ -57,28 +57,28 @@ function paintShopItem(n, srcImg) {
 const cards = [
   {
     id: 01,
-    name: "Etyiopia midle cofee 100g",
+    name: "Ethyiopia midle cofee 100g",
     img: "img/s6-f1.png",
     price: "18$",
     data: "ETHIOPIA",
   },
   {
     id: 02,
-    name: "Etyiopia hard cofee 100g",
+    name: "Ethyiopia hard cofee 100g",
     img: "img/s6-f1.png",
     price: "17$",
     data: "ETHIOPIA",
   },
   {
     id: 03,
-    name: "Etyiopia easy cofee 100g",
+    name: "Ethyiopia easy cofee 100g",
     img: "img/s6-f1.png",
     price: "11$",
     data: "ETHIOPIA",
   },
   {
     id: 04,
-    name: "Etyiopia normal cofee 100g",
+    name: "Ethyiopia normal cofee 100g",
     img: "img/s6-f1.png",
     price: "18$",
     data: "ETHIOPIA",
