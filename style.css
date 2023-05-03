@@ -58,6 +58,49 @@ position: relative;
     display: block;
 }
 
+.search__form{
+    width: 70%;
+    
+    
+}
+
+.search__form__item{
+    display: flex;
+    justify-content: start;
+}
+
+.search__input{
+    width: 100%;
+    padding: 10px;
+}
+
+.search__body{   
+    display: none;
+   
+    background-color: brown;
+}
+
+.search__item{
+    position: relative;
+}
+
+.search__item__list{
+ position: absolute;
+ background-color: rgba(124, 88, 42, 0.836);
+}
+
+.search__link{
+    display: inline-block;
+    padding: 5px;
+    width: 100%;
+    height: 100%;
+    font-size: 20px;
+}
+
+.search__link:hover{
+    cursor: pointer;
+}
+
 .shop__content{
     text-align: center;
 }
