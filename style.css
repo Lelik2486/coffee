@@ -89,6 +89,10 @@ position: relative;
  background-color: rgba(124, 88, 42, 0.836);
 }
 
+.search__item__elements:hover{
+    background-color: tan;
+}
+
 .search__link{
     display: inline-block;
     padding: 5px;
@@ -115,6 +119,9 @@ position: relative;
     width: 25%;
 }
 .shop__img{
+    display: flex;
+    justify-content: center;
+    align-items: center;
     height: 230px;
     background-size: cover;
 
@@ -131,4 +138,16 @@ position: relative;
 }
 .shop__img__bg4{
     background-image: url(img/s6-f4.png);
+}
+.shop__link{
+    padding: 7px;
+    display: inline-block;
+    background-color: tan;
+    opacity: 0;
+    transition: 0.4s;
+    width: 80%;
+
+}
+.shop__img:hover .shop__link{
+    opacity: 1;
 }

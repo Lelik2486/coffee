@@ -12,7 +12,19 @@ const searcButton = document.querySelector(".search__button");
 let timer;
 // Выпадающее меню
 dropdown.addEventListener("click", () => {
+  // console.log("hello dropdown");
   dropdownList.classList.toggle("active");
+
+  if (dropdownList.classList.contains("active")) {
+    dropdown.style.outline = "2px solid red";
+  } else {
+    dropdown.style.outline = "";
+  }
+  // dropdownList.forEach(link => {
+  //   link.addEventListener('click', () => {
+  //     console.log('hello dropdownList');
+  //   })
+  // })
 });
 
 // Выбор категории в выпадающем меню
@@ -22,76 +34,74 @@ dropdownlinks.forEach((link) => {
     if (link.textContent == "COFFEE") {
       paintCards(cards);
     } else {
-      paintCards(searchCardsName(cards, link.textContent));
+      paintCards(searchCardsName(cards, link.textContent, "data"));
     }
   });
 });
 
- 
 // Обработчик кнопки Поиск
-searchForm.addEventListener('submit', function (e) {
+searchForm.addEventListener("submit", function (e) {
   e.preventDefault();
-  if(!searchInput.value){
+  if (!searchInput.value) {
     return;
   }
   shopbody.innerHTML = "";
-  paintCards(searchCardsName(cards, searchInput.value));
-} );
-
+  paintCards(searchCardsName(cards, searchInput.value, "name"));
+});
 
 searchInput.addEventListener("focus", () => {
-  searchbody.style.display = 'block';
-  searchInput.addEventListener("input", function(e) {
+  searchbody.style.display = "block";
+  searchInput.addEventListener("input", function (e) {
     e.preventDefault();
-        // игнорим создание элемента если пользователь ничего не ввел
-        if(!searchInput.value){
-          return;
-        }  
+    // игнорим создание элемента если пользователь ничего не ввел
+    if (!searchInput.value) {
+      return;
+    }
+    searchItemList.innerHTML = "";
+    if (timer) {
+      clearTimeout(timer);
+    }
+    timer = setTimeout(() => {
+      writeSearchCards(searchCardsName(cards, searchInput.value, "name"));
+      if (searchInput.value.length < 2) {
         searchItemList.innerHTML = "";
-        if(timer){
-          clearTimeout(timer);
-        };
-        timer=setTimeout(() => {
-          writeSearchCards(searchCardsName(cards, searchInput.value));
-          if(searchInput.value.length < 2){
-            searchItemList.innerHTML = "";
-          };
-        }, 600);
+      }
+    }, 600);
   });
   clearTimeout(timer);
 });
 
 searchInput.addEventListener("blur", () => {
-  if (timer){
+  if (timer) {
     clearTimeout(timer);
-  };
+  }
   timer = setTimeout(() => {
-    searchbody.style.display = 'none';
+    searchbody.style.display = "none";
     searchItemList.innerHTML = "";
   }, 300);
 });
-  
+
 function writeSearchCards(arrSearch) {
   for (const card of arrSearch) {
     writeSearchItem(card);
-  };
-};
+  }
+}
 
 // функция отрисовки 1 карточки
 function writeSearchItem(card) {
   // создаем элементы "shop__item"
   let searchItemElements = document.createElement("li");
-  searchItemElements.classList.add('search__item__elements')
+  searchItemElements.classList.add("search__item__elements");
   let searchLink = document.createElement("a");
-  searchLink.classList.add('search__link')
+  searchLink.classList.add("search__link");
   // формируем содержимое
   searchLink.textContent = `${card.name}     ${card.price}`;
-  
-// обработчик клика выпадающего меню search
+
+  // обработчик клика выпадающего меню search
   searchLink.addEventListener("click", () => {
     shopbody.innerHTML = "";
     paintShopItem(card);
-    searchInput.value = '';
+    searchInput.value = "";
     searchItemList.innerHTML = "";
   });
 
@@ -103,30 +113,30 @@ function writeSearchItem(card) {
     searchLink,
     searchItemElements,
   };
-};
+}
 
 // функция поиска по name в массиве карточек
-function searchCardsName(cards, str) {
+function searchCardsName(cards, str, key) {
   const arrSearch = [];
   for (const card of cards) {
-    if(card.name.toLowerCase().includes(str.toLowerCase())){
+    if (card[key].toLowerCase().includes(str.toLowerCase().trim())) {
       arrSearch.push(card);
-    };
-  };
+    }
+  }
   return arrSearch;
-};
+}
 // функция отрисовки массива карточек
 function paintCards(arrSearch) {
   for (const card of arrSearch) {
-    paintShopItem(card)
+    paintShopItem(card);
   }
-};
+}
 // функция отрисовки 1 карточки
 function paintShopItem(card) {
-
   // создаем элементы "shop__item"
   let shopItem = document.createElement("div");
   let img = document.createElement("div");
+  img .innerHTML = `<a class="shop__link" href="##" data-id="${card.id}">В корзину</a>`
   let name = document.createElement("h3");
   let price = document.createElement("p");
 
@@ -151,7 +161,7 @@ function paintShopItem(card) {
     price,
     shopItem,
   };
-};
+}
 
 const cards = [
   {
